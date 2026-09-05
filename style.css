@@ -248,6 +248,22 @@ thead th {
   white-space: nowrap;
 }
 
+thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+}
+
+thead th.sortable:hover { color: var(--accent-hover); }
+
+.sort-arrow {
+  display: inline-block;
+  width: 0.9em;
+  margin-inline-start: 3px;
+  font-size: 0.75em;
+  color: var(--accent-hover);
+}
+
 /* خط جداکننده عمودی بین ستون‌ها */
 thead th + th,
 tbody td + td {
