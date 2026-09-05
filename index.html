@@ -34,7 +34,7 @@
       <!-- فرم ثبت نامه جدید (یکپارچه با جدول) -->
       <form id="addForm" class="add-form" autocomplete="off">
         <input type="text" id="f-number" placeholder="شماره نامه" required aria-label="شماره نامه" />
-        <input type="text" id="f-date" required aria-label="تاریخ" readonly placeholder="انتخاب تاریخ (شمسی)" />
+        <input type="text" id="f-date" required aria-label="تاریخ" readonly placeholder="انتخاب تاریخ" />
         <input type="text" id="f-title" placeholder="عنوان نامه" required aria-label="عنوان نامه" maxlength="200" />
         <input type="text" id="f-recipient" placeholder="گیرنده" required aria-label="گیرنده" maxlength="120" />
         <input type="text" id="f-reg" placeholder="شماره ثبت" required aria-label="شماره ثبت" />
@@ -49,8 +49,8 @@
           <thead>
             <tr>
               <th class="col-rownum">ردیف</th>
-              <th class="col-number">شماره نامه</th>
-              <th class="col-date">تاریخ</th>
+              <th class="col-number sortable" data-sort="number">شماره نامه<span class="sort-arrow" data-arrow="number"></span></th>
+              <th class="col-date sortable" data-sort="date">تاریخ<span class="sort-arrow" data-arrow="date"></span></th>
               <th class="col-title">عنوان نامه</th>
               <th class="col-recipient">گیرنده</th>
               <th class="col-reg">شماره ثبت</th>
