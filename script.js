@@ -72,11 +72,14 @@
   // ---------- دسترسی به Supabase ----------
 
   var letters = []; // کش محلی از آخرین داده‌های سرور
-  var sortMode = "date"; // "date" (پیش‌فرض: جدید به قدیم) یا "number" (بزرگ به کوچیک)
 
-  // مقایسه طبیعی رشته‌ها (تکه‌های عددی به‌صورت عدد مقایسه می‌شوند، نه رشته‌ای)
-  // خروجی برای مرتب‌سازی نزولی (بزرگ به کوچیک) طراحی شده است
-  function compareNaturalDesc(aStr, bStr) {
+  // sortMode.key: "date" یا "number" — sortMode.dir: 1 (صعودی) یا -1 (نزولی)
+  // مقدار پیش‌فرض هر ستون هنگام اولین کلیک روی آن (قبل از تغییر جهت با کلیک‌های بعدی)
+  var DEFAULT_DIR = { number: -1, date: -1 }; // شماره: بزرگ به کوچیک — تاریخ: جدید به قدیم
+  var sortMode = { key: "date", dir: DEFAULT_DIR.date };
+
+  // مقایسه طبیعی و صعودی رشته‌ها (تکه‌های عددی به‌صورت عدد مقایسه می‌شوند، نه رشته‌ای)
+  function compareNaturalAsc(aStr, bStr) {
     var a = normalizeDigits(aStr || "");
     var b = normalizeDigits(bStr || "");
     var ta = a.match(/\d+|\D+/g) || [];
@@ -90,31 +93,37 @@
       var cmp;
       if (na !== null && nb !== null) cmp = na - nb;
       else cmp = pa < pb ? -1 : pa > pb ? 1 : 0;
-      if (cmp !== 0) return -cmp; // نزولی
+      if (cmp !== 0) return cmp;
     }
     return 0;
   }
 
+  function compareDateAsc(aStr, bStr) {
+    // تاریخ شمسی به‌صورت رشته با صفر ابتدایی ذخیره می‌شود (مثل 1405/06/14)
+    // پس مقایسه رشته‌ای همان ترتیب زمانی را می‌دهد
+    var da = normalizeDigits(aStr || "");
+    var db = normalizeDigits(bStr || "");
+    return da < db ? -1 : da > db ? 1 : 0;
+  }
+
   function sortLetters(list) {
     var arr = list.slice();
-    if (sortMode === "number") {
-      arr.sort(function (a, b) { return compareNaturalDesc(a.number, b.number); });
+    var dir = sortMode.dir;
+    if (sortMode.key === "number") {
+      arr.sort(function (a, b) { return compareNaturalAsc(a.number, b.number) * dir; });
     } else {
-      // تاریخ شمسی به‌صورت رشته با صفر ابتدایی ذخیره می‌شود (مثل 1405/06/14)
-      // پس مقایسه رشته‌ای همان ترتیب زمانی را می‌دهد
-      arr.sort(function (a, b) {
-        var da = normalizeDigits(a.date || "");
-        var db = normalizeDigits(b.date || "");
-        if (da === db) return 0;
-        return da < db ? 1 : -1; // جدید به قدیم
-      });
+      arr.sort(function (a, b) { return compareDateAsc(a.date, b.date) * dir; });
     }
     return arr;
   }
 
   function updateSortIndicators() {
     document.querySelectorAll(".sort-arrow").forEach(function (el) {
-      el.textContent = el.getAttribute("data-arrow") === sortMode ? "▾" : "";
+      if (el.getAttribute("data-arrow") === sortMode.key) {
+        el.textContent = sortMode.dir === -1 ? "▾" : "▴";
+      } else {
+        el.textContent = "";
+      }
     });
   }
 
@@ -348,8 +357,12 @@
   document.querySelectorAll("thead th.sortable").forEach(function (th) {
     th.addEventListener("click", function () {
       var mode = th.getAttribute("data-sort");
-      if (sortMode === mode) return;
-      sortMode = mode;
+      if (sortMode.key === mode) {
+        sortMode.dir *= -1; // کلیک دوباره روی همان ستون: برعکس کردن ترتیب
+      } else {
+        sortMode.key = mode;
+        sortMode.dir = DEFAULT_DIR[mode];
+      }
       updateSortIndicators();
       render(currentView());
     });
