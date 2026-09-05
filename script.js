@@ -72,6 +72,51 @@
   // ---------- دسترسی به Supabase ----------
 
   var letters = []; // کش محلی از آخرین داده‌های سرور
+  var sortMode = "date"; // "date" (پیش‌فرض: جدید به قدیم) یا "number" (بزرگ به کوچیک)
+
+  // مقایسه طبیعی رشته‌ها (تکه‌های عددی به‌صورت عدد مقایسه می‌شوند، نه رشته‌ای)
+  // خروجی برای مرتب‌سازی نزولی (بزرگ به کوچیک) طراحی شده است
+  function compareNaturalDesc(aStr, bStr) {
+    var a = normalizeDigits(aStr || "");
+    var b = normalizeDigits(bStr || "");
+    var ta = a.match(/\d+|\D+/g) || [];
+    var tb = b.match(/\d+|\D+/g) || [];
+    var len = Math.max(ta.length, tb.length);
+    for (var i = 0; i < len; i += 1) {
+      var pa = ta[i] || "";
+      var pb = tb[i] || "";
+      var na = /^\d+$/.test(pa) ? parseInt(pa, 10) : null;
+      var nb = /^\d+$/.test(pb) ? parseInt(pb, 10) : null;
+      var cmp;
+      if (na !== null && nb !== null) cmp = na - nb;
+      else cmp = pa < pb ? -1 : pa > pb ? 1 : 0;
+      if (cmp !== 0) return -cmp; // نزولی
+    }
+    return 0;
+  }
+
+  function sortLetters(list) {
+    var arr = list.slice();
+    if (sortMode === "number") {
+      arr.sort(function (a, b) { return compareNaturalDesc(a.number, b.number); });
+    } else {
+      // تاریخ شمسی به‌صورت رشته با صفر ابتدایی ذخیره می‌شود (مثل 1405/06/14)
+      // پس مقایسه رشته‌ای همان ترتیب زمانی را می‌دهد
+      arr.sort(function (a, b) {
+        var da = normalizeDigits(a.date || "");
+        var db = normalizeDigits(b.date || "");
+        if (da === db) return 0;
+        return da < db ? 1 : -1; // جدید به قدیم
+      });
+    }
+    return arr;
+  }
+
+  function updateSortIndicators() {
+    document.querySelectorAll(".sort-arrow").forEach(function (el) {
+      el.textContent = el.getAttribute("data-arrow") === sortMode ? "▾" : "";
+    });
+  }
 
   async function fetchLetters() {
     var res = await db.from(TABLE).select("*").order("id", { ascending: true });
@@ -118,8 +163,8 @@
 
   function currentView() {
     var q = normalizeDigits(searchInput.value).trim().toLowerCase();
-    if (!q) return letters;
-    return letters.filter(function (l) { return matchesQuery(l, q); });
+    var list = q ? letters.filter(function (l) { return matchesQuery(l, q); }) : letters.slice();
+    return sortLetters(list);
   }
 
   function render(list) {
@@ -226,7 +271,7 @@
     delete addForm.dataset.editId;
     addBtn.textContent = "افزودن";
     addForm.classList.remove("editing");
-    fields.date.placeholder = "انتخاب تاریخ (شمسی)";
+    fields.date.placeholder = "انتخاب تاریخ";
   }
 
   addForm.addEventListener("submit", function (e) {
@@ -299,6 +344,17 @@
   searchInput.addEventListener("input", filterLetters);
   searchInput.addEventListener("keyup", filterLetters);
   searchColumn.addEventListener("change", filterLetters);
+
+  document.querySelectorAll("thead th.sortable").forEach(function (th) {
+    th.addEventListener("click", function () {
+      var mode = th.getAttribute("data-sort");
+      if (sortMode === mode) return;
+      sortMode = mode;
+      updateSortIndicators();
+      render(currentView());
+    });
+  });
+  updateSortIndicators();
 
   JC.attachJalaliDatepicker(fields.date);
 
