@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSTeam — دفتر اندیکاتور نامه‌ها</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <!-- سربرگ -->
+    <header class="header">
+      <h1 class="brand">MSTeam</h1>
+      <p class="subtitle">دفتر اندیکاتور نامه‌ها</p>
+    </header>
+
+    <!-- نوار ابزار: جستجو + افزودن نامه جدید -->
+    <section class="toolbar">
+      <input type="search" id="searchInput" class="search" placeholder="جستجو در همه ستون‌ها…" aria-label="جستجو" />
+
+      <!-- فرم ثبت نامه جدید (یکپارچه با جدول) -->
+      <form id="addForm" class="add-form" autocomplete="off">
+        <input type="text" id="f-number" placeholder="شماره نامه" required aria-label="شماره نامه" />
+        <input type="date" id="f-date" required aria-label="تاریخ" />
+        <input type="text" id="f-title" placeholder="عنوان نامه" required aria-label="عنوان نامه" />
+        <input type="text" id="f-recipient" placeholder="گیرنده" required aria-label="گیرنده" />
+        <input type="text" id="f-reg" placeholder="شماره ثبت" required aria-label="شماره ثبت" />
+        <button type="submit" class="btn-add">افزودن</button>
+      </form>
+    </section>
+
+    <!-- جدول نامه‌ها -->
+    <section class="table-wrap">
+      <div class="table-scroll">
+        <table id="lettersTable">
+          <thead>
+            <tr>
+              <th class="col-rownum">ردیف</th>
+              <th>شماره نامه</th>
+              <th>تاریخ</th>
+              <th>عنوان نامه</th>
+              <th>گیرنده</th>
+              <th>شماره ثبت</th>
+              <th class="col-action">حذف</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <p id="emptyMsg" class="empty-msg" hidden>موردی یافت نشد.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
