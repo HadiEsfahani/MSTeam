@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSTeam — دفتر اندیکاتور نامه‌ها</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <!-- سربرگ -->
+    <header class="header">
+      <h1 class="brand">MSTeam</h1>
+      <p class="subtitle">دفتر اندیکاتور نامه‌ها</p>
+    </header>
+
+    <!-- نوار ابزار: جستجو + افزودن نامه جدید -->
+    <section class="toolbar">
+      <input type="search" id="searchInput" class="search" placeholder="جستجو در عنوان، گیرنده، تاریخ و همه ستون‌ها…" aria-label="جستجو" />
+
+      <!-- فرم ثبت نامه جدید (یکپارچه با جدول) -->
+      <form id="addForm" class="add-form" autocomplete="off">
+        <input type="text" id="f-number" placeholder="شماره نامه" required aria-label="شماره نامه" />
+        <input type="text" id="f-date" required aria-label="تاریخ" readonly placeholder="انتخاب تاریخ (شمسی)" />
+        <input type="text" id="f-title" placeholder="عنوان نامه" required aria-label="عنوان نامه" maxlength="200" />
+        <input type="text" id="f-recipient" placeholder="گیرنده" required aria-label="گیرنده" maxlength="120" />
+        <input type="text" id="f-reg" placeholder="شماره ثبت" required aria-label="شماره ثبت" />
+        <button type="submit" class="btn-add">افزودن</button>
+      </form>
+    </section>
+
+    <!-- جدول نامه‌ها -->
+    <section class="table-wrap">
+      <div class="table-scroll">
+        <table id="lettersTable">
+          <thead>
+            <tr>
+              <th class="col-rownum">ردیف</th>
+              <th class="col-number">شماره نامه</th>
+              <th class="col-date">تاریخ</th>
+              <th class="col-title">عنوان نامه</th>
+              <th class="col-recipient">گیرنده</th>
+              <th class="col-reg">شماره ثبت</th>
+              <th class="col-action">عملیات</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <p id="emptyMsg" class="empty-msg" hidden>موردی یافت نشد.</p>
+    </section>
+  </main>
+
+  <!-- مودال تأیید (حذف / اصلاح) -->
+  <div id="confirm-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-msg">
+    <div class="modal-box">
+      <p id="confirm-msg" class="modal-msg"></p>
+      <div class="modal-actions">
+        <button type="button" id="confirm-ok" class="btn-modal-primary">تأیید</button>
+        <button type="button" id="confirm-cancel" class="btn-modal-cancel">انصراف</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- تقویم شمسی -->
+  <script src="jalali-calendar.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
