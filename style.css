@@ -150,35 +150,39 @@ body {
 /* فرم ثبت نامه جدید */
 .add-form {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px;
+  padding: 12px 14px;
   box-shadow: var(--shadow);
 }
 
+.add-form-row {
+  display: grid;
+  gap: 8px;
+}
+
+/* شماره نامه / تاریخ نامه / عنوان نامه (بیشترین فضا) / مرجع دریافت‌کننده */
+.add-form-row-1 { grid-template-columns: 92px 104px minmax(180px, 1fr) 148px; }
+
+/* مخاطب / تنظیم‌کننده / شماره ثبت / دکمه افزودن */
+.add-form-row-2 { grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) 92px 118px; }
+
 .add-form input {
-  padding: 9px 13px;
+  min-width: 0;
+  width: 100%;
+  padding: 7px 11px;
   border: 1px solid var(--border-strong);
-  border-radius: 9px;
+  border-radius: 8px;
   background: var(--surface-alt);
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.83rem;
   color: var(--text);
   outline: none;
   transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
-
-/* اندازه هر فیلد متناسب با محتوایی که نگه می‌دارد */
-#f-number     { flex: 0 1 100px; min-width: 88px; }
-#f-date       { flex: 0 1 120px; min-width: 104px; }
-#f-title      { flex: 2 1 240px; min-width: 190px; }
-#f-referrer   { flex: 1 1 150px; min-width: 130px; }
-#f-addressee  { flex: 1 1 130px; min-width: 110px; }
-#f-preparer   { flex: 1 1 130px; min-width: 110px; }
-#f-reg        { flex: 0 1 100px; min-width: 88px; }
 
 .add-form input::placeholder { color: var(--muted); }
 
@@ -189,14 +193,15 @@ body {
 }
 
 .add-form button {
-  flex: 0 0 auto;
-  padding: 9px 30px;
+  min-width: 0;
+  width: 100%;
+  padding: 7px 10px;
   background: var(--accent);
   color: var(--accent-text);
   border: none;
-  border-radius: 9px;
+  border-radius: 8px;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.83rem;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(110, 195, 244, 0.25);
@@ -207,6 +212,7 @@ body {
   background: var(--accent-hover);
   transform: translateY(-1px);
 }
+
 
 .add-form button:active { transform: translateY(0); }
 
@@ -232,7 +238,7 @@ table {
 /* عرض ثابت ستون‌ها (حدود کاراکتر موردنیاز) */
 .col-rownum    { width: 40px; }
 .col-number    { width: 88px; }   /* ~۸ کاراکتر — کافی برای «1403/120» */
-.col-date      { width: 100px; }  /* ~۱۰ کاراکتر شمسی */
+.col-date      { width: 112px; }  /* ~۱۰ کاراکتر شمسی + کمی فضای اضافه تا نشکند */
 .col-title     { width: auto;  }  /* بقیه فضا */
 .col-referrer  { width: 130px; }  /* مرجع دریافت‌کننده */
 .col-addressee { width: 110px; }  /* مخاطب */
@@ -289,6 +295,7 @@ tbody td {
 /* تاریخ و اعداد با فونت فارسی */
 td.col-date, td.col-rownum, td.col-number, td.col-reg {
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 tbody tr:nth-child(even) td { background: var(--surface-alt); }
@@ -336,9 +343,11 @@ td.col-action { text-align: center; white-space: nowrap; padding: 4px 6px; }
     margin-bottom: 8px;
     line-height: 1.5;
   }
-  #f-number, #f-date, #f-reg { flex: 1 1 45%; }
-  #f-referrer, #f-addressee, #f-preparer { flex: 1 1 45%; }
-  #f-title { flex: 1 1 100%; }
+  .add-form-row-1 { grid-template-columns: 1fr 1fr; }
+  .add-form-row-1 #f-title,
+  .add-form-row-1 #f-referrer { grid-column: 1 / -1; }
+  .add-form-row-2 { grid-template-columns: 1fr 1fr; }
+  .add-form-row-2 button { grid-column: 1 / -1; }
 }
 
 /* ---------- مودال تأیید ---------- */
