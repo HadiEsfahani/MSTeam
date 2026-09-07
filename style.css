@@ -165,10 +165,10 @@ body {
 }
 
 /* شماره نامه / تاریخ نامه / عنوان نامه (بیشترین فضا) / مرجع دریافت‌کننده */
-.add-form-row-1 { grid-template-columns: 92px 104px minmax(160px, 1fr) 170px; }
+.add-form-row-1 { grid-template-columns: 92px 104px minmax(160px, 1fr) 155px; }
 
 /* مخاطب / تنظیم‌کننده / شماره ثبت / دکمه افزودن */
-.add-form-row-2 { grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) 92px 118px; }
+.add-form-row-2 { grid-template-columns: minmax(140px, 1fr) 128px 106px 118px; }
 
 .add-form input {
   min-width: 0;
