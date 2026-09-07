@@ -1,0 +1,165 @@
+/* ===== login.css — صفحه ورود (طراحی مینیمال روی بک‌گراند برند) ===== */
+
+:root {
+  --l-accent: #1c7ed6;
+  --l-accent-hover: #1467b3;
+  --l-accent-soft: rgba(28, 126, 214, 0.10);
+  --l-text: #1c2b3a;
+  --l-muted: #64758a;
+  --l-border: rgba(28, 126, 214, 0.22);
+  --l-card-bg: rgba(255, 255, 255, 0.66);
+  --l-danger: #d64545;
+  --l-danger-soft: rgba(214, 69, 69, 0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+.login-body {
+  font-family: "Vazirmatn", "Vazir", Tahoma, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  background-image: url("assets/login-bg.webp");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 40px;
+  /* فاصله از بالا تا زیر لوگوی داخل تصویر پس‌زمینه */
+  padding-top: 39vh;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 300px;
+  background: var(--l-card-bg);
+  border: 1px solid rgba(28, 126, 214, 0.18);
+  border-radius: 16px;
+  padding: 22px 24px 24px;
+  box-shadow: 0 1px 2px rgba(20, 40, 70, 0.06), 0 18px 40px rgba(20, 40, 70, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: login-rise 0.5s ease;
+}
+
+@keyframes login-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-card.shake { animation: login-shake 0.4s; }
+
+@keyframes login-shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+.login-heading {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.login-heading h1 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--l-text);
+  letter-spacing: 0.2px;
+}
+
+.login-heading-line {
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: var(--l-accent);
+  opacity: 0.55;
+  margin: 0 auto 10px;
+  border-radius: 2px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login-field label {
+  font-size: 0.72rem;
+  color: var(--l-muted);
+  font-weight: 600;
+  padding: 0 2px;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--l-border);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.75);
+  font-family: inherit;
+  font-size: 0.86rem;
+  color: var(--l-text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.login-field input::placeholder { color: #a3b0bf; }
+
+.login-field input:focus {
+  border-color: var(--l-accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--l-accent-soft);
+}
+
+.login-error {
+  font-size: 0.76rem;
+  color: var(--l-danger);
+  background: var(--l-danger-soft);
+  border: 1px solid rgba(214, 69, 69, 0.25);
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.login-btn {
+  margin-top: 4px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 9px;
+  background: var(--l-accent);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(28, 126, 214, 0.28);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.login-btn:hover { background: var(--l-accent-hover); transform: translateY(-1px); }
+.login-btn:active { transform: translateY(0); }
+
+/* ---------- موبایل ---------- */
+@media (max-width: 520px) {
+  .login-wrap { padding-top: 34vh; }
+  .login-card { max-width: 280px; padding: 20px 18px 20px; }
+}
+
+@media (max-height: 560px) {
+  .login-wrap { padding-top: 22vh; }
+}
