@@ -165,7 +165,7 @@ body {
 }
 
 /* شماره نامه / تاریخ نامه / عنوان نامه (بیشترین فضا) / مرجع دریافت‌کننده */
-.add-form-row-1 { grid-template-columns: 92px 104px minmax(180px, 1fr) 148px; }
+.add-form-row-1 { grid-template-columns: 92px 104px minmax(160px, 1fr) 170px; }
 
 /* مخاطب / تنظیم‌کننده / شماره ثبت / دکمه افزودن */
 .add-form-row-2 { grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) 92px 118px; }
@@ -240,20 +240,20 @@ table {
 .col-number    { width: 88px; }   /* ~۸ کاراکتر — کافی برای «1403/120» */
 .col-date      { width: 112px; }  /* ~۱۰ کاراکتر شمسی + کمی فضای اضافه تا نشکند */
 .col-title     { width: auto;  }  /* بقیه فضا */
-.col-referrer  { width: 130px; }  /* مرجع دریافت‌کننده */
+.col-referrer  { width: 142px; }  /* مرجع دریافت‌کننده */
 .col-addressee { width: 110px; }  /* مخاطب */
 .col-preparer  { width: 110px; }  /* تنظیم‌کننده */
-.col-reg       { width: 80px; }   /* ~۸ کاراکتر */
-.col-action    { width: 108px; }  /* جای کافی برای هر دو دکمه بدون بریدگی */
+.col-reg       { width: 92px; }   /* ~۸ کاراکتر */
+.col-action    { width: 72px; }   /* دو آیکون هم‌اندازه — دیگر نیازی به فضای متن نیست */
 
 thead th {
   background: var(--surface-2);
   color: var(--accent);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.3px;
   text-align: right;
-  padding: 7px 12px;
+  padding: 6px 10px;
   border-bottom: 2px solid var(--border-strong);
   white-space: nowrap;
 }
@@ -281,9 +281,9 @@ tbody td + td {
 }
 
 tbody td {
-  padding: 4px 12px;
-  font-size: 0.88rem;
-  line-height: 1.4;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  line-height: 1.35;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
   word-wrap: break-word;
@@ -311,17 +311,15 @@ td.col-action { text-align: center; white-space: nowrap; padding: 4px 6px; }
   background: none;
   border: 1px solid transparent;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 1;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 3px 7px;
   margin: 0 1px;
   border-radius: 7px;
   font-family: inherit;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
-
-.btn-del { font-size: 1rem; padding: 3px 7px; }
 
 .btn-del:hover { color: var(--danger); background: var(--danger-soft); border-color: var(--danger); }
 .btn-edit:hover { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); }
