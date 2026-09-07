@@ -38,7 +38,7 @@ html, body { height: 100%; }
    چه صفحه پهن باشد چه باریک و بلند (موبایل). */
 .login-frame {
   position: relative;
-  width: min(100vw, 150vh); /* 150vh = 100vh × نسبت ۱۵۳۶/۱۰۲۴ */
+  width: min(82vw, 123vh); /* کوچک‌تر از کل صفحه — طوری که پس‌زمینه/لوگو دورتر و کوچک‌تر دیده شود */
   aspect-ratio: 1536 / 1024;
   background-image: url("assets/login-bg.webp");
   background-size: 100% 100%;
@@ -49,7 +49,7 @@ html, body { height: 100%; }
    پس با هر اندازه صفحه هم‌راستا با لوگو باقی می‌ماند. */
 .login-card-pos {
   position: absolute;
-  top: 39%;
+  top: 46%;
   left: 0;
   right: 0;
   display: flex;
