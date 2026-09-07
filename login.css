@@ -177,6 +177,17 @@ html, body { height: 100%; }
 .login-btn:disabled { opacity: 0.7; cursor: default; transform: none; }
 
 /* ---------- موبایل ---------- */
+/* روی صفحه‌های باریک و بلند (موبایل)، چون نسبت تصویر عریض است (۱۵۳۶:۱۰۲۴)،
+   قاب خیلی کوچک می‌شود و اگر وسط صفحه بماند فاصله‌ی خالی زیادی بالا/پایینش
+   ایجاد می‌شود و لوگو/کارت به چشم خیلی پایین می‌آید. اینجا قاب را نزدیک بالای
+   صفحه نگه می‌داریم. */
+@media (max-width: 600px) {
+  .login-stage {
+    align-items: flex-start;
+    padding-top: 8vh;
+  }
+}
+
 @media (max-width: 420px) {
   .login-card { max-width: 250px; padding: 16px 16px 18px; }
 }
