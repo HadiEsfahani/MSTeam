@@ -172,11 +172,13 @@ body {
 }
 
 /* اندازه هر فیلد متناسب با محتوایی که نگه می‌دارد */
-#f-number     { flex: 0 1 110px; min-width: 92px; }
-#f-date       { flex: 0 1 128px; min-width: 108px; }
-#f-title      { flex: 2 1 260px; min-width: 200px; }
-#f-recipient  { flex: 1.2 1 170px; min-width: 140px; }
-#f-reg        { flex: 0 1 110px; min-width: 92px; }
+#f-number     { flex: 0 1 100px; min-width: 88px; }
+#f-date       { flex: 0 1 120px; min-width: 104px; }
+#f-title      { flex: 2 1 240px; min-width: 190px; }
+#f-referrer   { flex: 1 1 150px; min-width: 130px; }
+#f-addressee  { flex: 1 1 130px; min-width: 110px; }
+#f-preparer   { flex: 1 1 130px; min-width: 110px; }
+#f-reg        { flex: 0 1 100px; min-width: 88px; }
 
 .add-form input::placeholder { color: var(--muted); }
 
@@ -221,19 +223,21 @@ body {
 
 table {
   width: 100%;
-  min-width: 860px;
+  min-width: 1040px;
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed; /* عرض ستون‌ها ثابت بر اساس colgroup */
 }
 
 /* عرض ثابت ستون‌ها (حدود کاراکتر موردنیاز) */
-.col-rownum    { width: 42px; }
-.col-number    { width: 92px; }   /* ~۸ کاراکتر — کافی برای «1403/120» */
-.col-date      { width: 112px; }  /* ~۱۰ کاراکتر شمسی + کمی فضای اضافه */
+.col-rownum    { width: 40px; }
+.col-number    { width: 88px; }   /* ~۸ کاراکتر — کافی برای «1403/120» */
+.col-date      { width: 100px; }  /* ~۱۰ کاراکتر شمسی */
 .col-title     { width: auto;  }  /* بقیه فضا */
-.col-recipient { width: 160px; }  /* ~۲۲ کاراکتر */
-.col-reg       { width: 84px; }   /* ~۸ کاراکتر */
+.col-referrer  { width: 130px; }  /* مرجع دریافت‌کننده */
+.col-addressee { width: 110px; }  /* مخاطب */
+.col-preparer  { width: 110px; }  /* تنظیم‌کننده */
+.col-reg       { width: 80px; }   /* ~۸ کاراکتر */
 .col-action    { width: 108px; }  /* جای کافی برای هر دو دکمه بدون بریدگی */
 
 thead th {
@@ -333,7 +337,8 @@ td.col-action { text-align: center; white-space: nowrap; padding: 4px 6px; }
     line-height: 1.5;
   }
   #f-number, #f-date, #f-reg { flex: 1 1 45%; }
-  #f-title, #f-recipient { flex: 1 1 100%; }
+  #f-referrer, #f-addressee, #f-preparer { flex: 1 1 45%; }
+  #f-title { flex: 1 1 100%; }
 }
 
 /* ---------- مودال تأیید ---------- */
