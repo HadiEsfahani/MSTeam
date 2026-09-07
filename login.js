@@ -41,6 +41,23 @@
     submitLabel.textContent = isLoading ? "در حال بررسی…" : "ورود";
   }
 
+  // تشخیص علت رایج خطا و نمایش پیام قابل‌فهم‌تر برای دیباگ
+  function messageForError(err) {
+    var raw = (err && (err.message || err.hint || err.details)) || "";
+    console.error("Supabase RPC error:", err);
+
+    if (/schema cache|Could not find the function|does not exist|PGRST20[24]/i.test(raw)) {
+      return "تابع ورود روی پایگاه داده پیدا نشد. اسکریپت supabase-setup.sql (بخش «ورود») را در SQL Editor پروژه اجرا کنید.";
+    }
+    if (/permission denied/i.test(raw)) {
+      return "دسترسی اجرای تابع ورود داده نشده. دستور grant execute در supabase-setup.sql را دوباره اجرا کنید.";
+    }
+    if (/Failed to fetch|NetworkError|network/i.test(raw)) {
+      return "اتصال به Supabase برقرار نشد. اینترنت یا آدرس/کلید داخل supabase-config.js را بررسی کنید.";
+    }
+    return "خطا در اتصال به پایگاه داده" + (raw ? (": " + raw) : ".");
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var u = userInput.value.trim();
@@ -53,8 +70,7 @@
       .then(function (res) {
         setLoading(false);
         if (res.error) {
-          console.error(res.error);
-          showError("خطا در اتصال به پایگاه داده.");
+          showError(messageForError(res.error));
           return;
         }
         if (res.data === true) {
@@ -68,8 +84,7 @@
       })
       .catch(function (err) {
         setLoading(false);
-        console.error(err);
-        showError("خطا در اتصال به پایگاه داده.");
+        showError(messageForError(err));
       });
   });
 
