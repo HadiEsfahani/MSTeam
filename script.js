@@ -237,7 +237,7 @@
       var editBtn = document.createElement("button");
       editBtn.className = "btn-edit";
       editBtn.type = "button";
-      editBtn.textContent = "ویرایش";
+      editBtn.textContent = "✎";
       editBtn.title = "اصلاح نامه";
       editBtn.setAttribute("aria-label", "ویرایش نامه " + item.number);
       editBtn.addEventListener("click", function () { startEdit(item); });
