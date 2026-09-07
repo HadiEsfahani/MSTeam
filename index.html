@@ -35,14 +35,18 @@
 
       <!-- فرم ثبت نامه جدید (یکپارچه با جدول) -->
       <form id="addForm" class="add-form" autocomplete="off">
-        <input type="text" id="f-number" placeholder="شماره نامه" required aria-label="شماره نامه" />
-        <input type="text" id="f-date" required aria-label="تاریخ نامه" readonly placeholder="انتخاب تاریخ" />
-        <input type="text" id="f-title" placeholder="عنوان نامه" required aria-label="عنوان نامه" maxlength="200" />
-        <input type="text" id="f-referrer" placeholder="مرجع دریافت‌کننده" required aria-label="مرجع دریافت‌کننده" maxlength="120" />
-        <input type="text" id="f-addressee" placeholder="مخاطب" required aria-label="مخاطب" maxlength="120" />
-        <input type="text" id="f-preparer" placeholder="تنظیم‌کننده" required aria-label="تنظیم‌کننده" maxlength="120" />
-        <input type="text" id="f-reg" placeholder="شماره ثبت" required aria-label="شماره ثبت" />
-        <button type="submit" class="btn-add">افزودن</button>
+        <div class="add-form-row add-form-row-1">
+          <input type="text" id="f-number" placeholder="شماره نامه" required aria-label="شماره نامه" />
+          <input type="text" id="f-date" required aria-label="تاریخ نامه" readonly placeholder="انتخاب تاریخ" />
+          <input type="text" id="f-title" placeholder="عنوان نامه" required aria-label="عنوان نامه" maxlength="200" />
+          <input type="text" id="f-referrer" placeholder="مرجع دریافت‌کننده" required aria-label="مرجع دریافت‌کننده" maxlength="120" />
+        </div>
+        <div class="add-form-row add-form-row-2">
+          <input type="text" id="f-addressee" placeholder="مخاطب" required aria-label="مخاطب" maxlength="120" />
+          <input type="text" id="f-preparer" placeholder="تنظیم‌کننده" required aria-label="تنظیم‌کننده" maxlength="120" />
+          <input type="text" id="f-reg" placeholder="شماره ثبت" required aria-label="شماره ثبت" />
+          <button type="submit" class="btn-add">افزودن</button>
+        </div>
       </form>
     </section>
 
