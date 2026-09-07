@@ -31,7 +31,9 @@
     number: document.getElementById("f-number"),
     date: document.getElementById("f-date"),
     title: document.getElementById("f-title"),
-    recipient: document.getElementById("f-recipient"),
+    referrer: document.getElementById("f-referrer"),
+    addressee: document.getElementById("f-addressee"),
+    preparer: document.getElementById("f-preparer"),
     reg: document.getElementById("f-reg")
   };
 
@@ -209,10 +211,20 @@
       tdTitle.textContent = item.title;
       tr.appendChild(tdTitle);
 
-      var tdRecipient = document.createElement("td");
-      tdRecipient.className = "col-recipient";
-      tdRecipient.textContent = item.recipient;
-      tr.appendChild(tdRecipient);
+      var tdReferrer = document.createElement("td");
+      tdReferrer.className = "col-referrer";
+      tdReferrer.textContent = item.referrer;
+      tr.appendChild(tdReferrer);
+
+      var tdAddressee = document.createElement("td");
+      tdAddressee.className = "col-addressee";
+      tdAddressee.textContent = item.addressee;
+      tr.appendChild(tdAddressee);
+
+      var tdPreparer = document.createElement("td");
+      tdPreparer.className = "col-preparer";
+      tdPreparer.textContent = item.preparer;
+      tr.appendChild(tdPreparer);
 
       var tdReg = document.createElement("td");
       tdReg.className = "col-reg";
@@ -262,7 +274,7 @@
   function matchesQuery(l, q) {
     var col = searchColumn.value;
     if (col === "all") {
-      return [l.number, l.date, l.title, l.recipient, l.reg].some(function (v) {
+      return [l.number, l.date, l.title, l.referrer, l.addressee, l.preparer, l.reg].some(function (v) {
         return normalizeDigits(v).toLowerCase().indexOf(q) !== -1;
       });
     }
@@ -289,10 +301,13 @@
       number: fields.number.value.trim(),
       date: normalizeDigits(fields.date.value).trim(),
       title: fields.title.value.trim(),
-      recipient: fields.recipient.value.trim(),
+      referrer: fields.referrer.value.trim(),
+      addressee: fields.addressee.value.trim(),
+      preparer: fields.preparer.value.trim(),
       reg: fields.reg.value.trim()
     };
-    if (!data.number || !data.date || !data.title || !data.recipient || !data.reg) return;
+    if (!data.number || !data.date || !data.title || !data.referrer ||
+        !data.addressee || !data.preparer || !data.reg) return;
 
     if (addForm.dataset.editId) {
       var editId = addForm.dataset.editId;
@@ -321,7 +336,9 @@
     fields.number.value = item.number;
     fields.date.value = toPersianDigits(item.date);
     fields.title.value = item.title;
-    fields.recipient.value = item.recipient;
+    fields.referrer.value = item.referrer;
+    fields.addressee.value = item.addressee;
+    fields.preparer.value = item.preparer;
     fields.reg.value = item.reg;
     addBtn.textContent = "ثبت اصلاحات";
     addForm.classList.add("editing");
