@@ -9,32 +9,32 @@
 <body class="login-body">
 
   <div class="login-stage">
-    <div class="login-frame">
-      <div class="login-card-pos">
-        <div class="login-card" id="loginCard">
-          <form id="loginForm" class="login-form" autocomplete="off">
-            <div class="login-heading">
-              <span class="login-heading-line"></span>
-              <h1>ورود به سامانه</h1>
-            </div>
+    <div class="login-content">
+      <img src="assets/logo.webp" alt="MST Co." class="login-logo" />
 
-            <div class="login-field">
-              <label for="username">نام کاربری</label>
-              <input type="text" id="username" name="username" autocomplete="username" required />
-            </div>
+      <div class="login-card" id="loginCard">
+        <form id="loginForm" class="login-form" autocomplete="off">
+          <div class="login-heading">
+            <span class="login-heading-line"></span>
+            <h1>ورود به سامانه</h1>
+          </div>
 
-            <div class="login-field">
-              <label for="password">رمز عبور</label>
-              <input type="password" id="password" name="password" autocomplete="current-password" required />
-            </div>
+          <div class="login-field">
+            <label for="username">نام کاربری</label>
+            <input type="text" id="username" name="username" autocomplete="username" required />
+          </div>
 
-            <p id="loginError" class="login-error" hidden>نام کاربری یا رمز عبور اشتباه است.</p>
+          <div class="login-field">
+            <label for="password">رمز عبور</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required />
+          </div>
 
-            <button type="submit" class="login-btn">
-              <span>ورود</span>
-            </button>
-          </form>
-        </div>
+          <p id="loginError" class="login-error" hidden>نام کاربری یا رمز عبور اشتباه است.</p>
+
+          <button type="submit" class="login-btn">
+            <span>ورود</span>
+          </button>
+        </form>
       </div>
     </div>
   </div>
