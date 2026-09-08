@@ -1,4 +1,4 @@
-/* ===== login.css — صفحه ورود (طراحی مینیمال روی بک‌گراند برند) ===== */
+/* ===== login.css — صفحه ورود (بک‌گراند + لوگوی جداگانه) ===== */
 
 :root {
   --l-accent: #1c7ed6;
@@ -10,51 +10,50 @@
   --l-card-bg: rgba(255, 255, 255, 0.72);
   --l-danger: #d64545;
   --l-danger-soft: rgba(214, 69, 69, 0.10);
-  --l-page-bg: #eef2f7; /* هم‌رنگ با گوشه‌های تصویر پس‌زمینه، تا لبه‌ها دیده نشوند */
+  --l-page-bg: #eef2f7; /* هم‌رنگ با گوشه‌های تصویر پس‌زمینه، برای فید شدن لبه‌ها */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body { height: 100%; }
 
+/* بک‌گراند به‌صورت مستقل روی کل صفحه: با cover همیشه بدون کش‌آمدگی،
+   با بهترین زوم ممکن، کل صفحه را می‌پوشاند — چه دسکتاپ (عریض) چه موبایل (باریک و بلند). */
 .login-body {
   font-family: "Vazirmatn", "Vazir", Tahoma, "Segoe UI", sans-serif;
-  background: var(--l-page-bg);
-  overflow: hidden;
-}
-
-/* کل صفحه: فقط برای وسط‌چین کردن قاب تصویر استفاده می‌شود */
-.login-stage {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-/* قاب تصویر: همیشه با همان نسبت ابعاد اصلی عکس (۱۵۳۶ در ۱۰۲۴) نمایش داده می‌شود،
-   یعنی هیچ‌وقت زوم/برش نمی‌خورد و کامل داخل صفحه جا می‌شود —
-   چه صفحه پهن باشد چه باریک و بلند (موبایل). */
-.login-frame {
-  position: relative;
-  width: min(82vw, 123vh); /* کوچک‌تر از کل صفحه — طوری که پس‌زمینه/لوگو دورتر و کوچک‌تر دیده شود */
-  aspect-ratio: 1536 / 1024;
+  min-height: 100vh;
+  background-color: var(--l-page-bg);
   background-image: url("assets/login-bg.webp");
-  background-size: 100% 100%;
+  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
-/* موقعیت کارت ورود: دقیقاً زیر لوگو، به‌صورت درصدی از ارتفاع همین قاب —
-   پس با هر اندازه صفحه هم‌راستا با لوگو باقی می‌ماند. */
-.login-card-pos {
-  position: absolute;
-  top: 46%;
-  left: 0;
-  right: 0;
+/* کانتینر وسط‌چین برای ستون لوگو + کارت ورود */
+.login-stage {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 0 16px;
+  padding: 32px 16px;
+}
+
+.login-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* لوگوی جداگانه: کمی کوچک‌تر از عرض کارت ورود، بالای کارت */
+.login-logo {
+  display: block;
+  width: min(56vw, 230px);
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 10px 22px rgba(20, 40, 70, 0.18));
+  animation: login-rise 0.5s ease;
 }
 
 .login-card {
@@ -177,17 +176,13 @@ html, body { height: 100%; }
 .login-btn:disabled { opacity: 0.7; cursor: default; transform: none; }
 
 /* ---------- موبایل ---------- */
-/* روی صفحه‌های باریک و بلند (موبایل)، چون نسبت تصویر عریض است (۱۵۳۶:۱۰۲۴)،
-   قاب خیلی کوچک می‌شود و اگر وسط صفحه بماند فاصله‌ی خالی زیادی بالا/پایینش
-   ایجاد می‌شود و لوگو/کارت به چشم خیلی پایین می‌آید. اینجا قاب را نزدیک بالای
-   صفحه نگه می‌داریم. */
-@media (max-width: 600px) {
-  .login-stage {
-    align-items: flex-start;
-    padding-top: 8vh;
-  }
+@media (max-width: 420px) {
+  .login-logo { width: min(52vw, 190px); margin-bottom: 16px; }
+  .login-card { max-width: 250px; padding: 16px 16px 18px; }
 }
 
-@media (max-width: 420px) {
-  .login-card { max-width: 250px; padding: 16px 16px 18px; }
+/* صفحه‌های خیلی کوتاه (لندسکیپ موبایل): فاصله‌ها را جمع‌تر کن تا اسکرول لازم نشود */
+@media (max-height: 480px) {
+  .login-stage { padding: 16px 16px; }
+  .login-logo { width: min(30vw, 140px); margin-bottom: 10px; }
 }
